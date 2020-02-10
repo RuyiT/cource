@@ -4,7 +4,8 @@ git branch dev 创建dev分支
 git checkout dev 或者 git switch dev从当前分支切换到dev分支
 git merge dev 当前分支合并dev代码
 git branch -d dev 删除dev分支
-
+git tag dev 创建标签
+如果要推送某个标签到远程，使用命令git push origin <tagname>：
 
 /*已有项目绑定git仓库*/
 1.github创建一个空的仓库
