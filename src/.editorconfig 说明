@@ -1,0 +1,6 @@
+root = true
+[*] //对所有文件生效
+charset = utf-8 //编码格式
+indent_style = tabs //缩进按键
+indent_size = 4 //缩进的尺寸
+//最后要安装editorConfig for VS Code插件

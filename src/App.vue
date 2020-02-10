@@ -8,6 +8,15 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: '',
+  data () {
+    return {
+    }
+  }
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

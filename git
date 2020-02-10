@@ -1,0 +1,9 @@
+/*常用git命令*/
+git checkout -b dev或者git switch -c dev创建并切换到dev分支
+git branch dev 创建dev分支
+git checkout dev 或者 git switch dev从当前分支切换到dev分支
+git merge dev 当前分支合并dev代码
+git branch -d dev 删除dev分支
+
+
+/*新项目绑定git仓库*/
