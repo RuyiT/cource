@@ -6,4 +6,18 @@ git merge dev 当前分支合并dev代码
 git branch -d dev 删除dev分支
 
 
-/*新项目绑定git仓库*/
+/*已有项目绑定git仓库*/
+1.github创建一个空的仓库
+2.初始化本地仓库，并提交内容到本地
+	2.1) touch README.md
+	2.2) git init
+	2.3) git add .
+	2.4) git commit -m '本地仓库初始化'
+3.连接到远程仓库，并将代码同步到远程仓库
+	3.1)git remote add origin '远程仓库地址'  //连接到远程仓库并为该仓库创建别名 , 别名为origin
+	3.2)git push -u origin master  //创建一个 upStream （上传流），并将本地代码通过这个 upStream 推送到 别名为 origin 的仓库中的 master 分支上
+4.修改本地代码，然后提交并推送到Github
+	4:注意事项
+	如果有多个远程仓库 或者 多个分支， 并且需要将代码推送到指定仓库的指定分支上
+	git pull 仓库别名 仓库分支名 
+	git push 仓库别名 仓库分支名
