@@ -13,7 +13,7 @@
 			}
 		},
 		mounted () {
-			console.log(this.attr)
+			console.log(this.$params.name)
 		}
 	}
 </script>
