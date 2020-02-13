@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+		{{ food }}
     <button @click="handleClick('back')">返回上一页</button>
     <button @click="handleClick('push')">跳转到argu</button>
     <button @click="handleClick('replace')">替换到parent</button>
@@ -11,10 +12,28 @@
 // import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
-  name: 'Home',
+	name: 'Home',
+	props: {
+		food: {
+			type: String,
+			default: 'hanbao'
+		}
+	},
   // components: {
   //   HelloWorld
-  // },
+	// },
+	beforeRouteEnter (to, from, next) {
+		// 即将进入页面的时候调用，获取不到this
+		next(vm => {
+			console.log(vm)
+		})
+	},
+	beforeRouteLeave (to, from, next) {
+		// 当用户要离开页面的时候处理一些逻辑
+		const leave = confirm('您确定要离开吗?')
+		if (leave) next()
+		else next(false)
+	},
   methods: {
     handleClick (type) {
       if (type === 'back') this.$router.back()

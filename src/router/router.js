@@ -4,7 +4,14 @@ export default [
 		path: '/',
 		name: 'Home',
 		alias: 'home_page', //别名路径，输入这个路径也是home
-		component: Home
+		component: Home,
+		props: route => ({ //函数模式路由传参
+			food: route.query.food //这是一个对象，也可以用函数模式返回对象
+		}),
+		beforeEnter: (to, form, next) => { //路由内独享守卫
+			//写些判断逻辑
+			next()
+		}
 	},
 	{
 		path: '/about',
@@ -12,12 +19,25 @@ export default [
 		// route level code-splitting
 		// this generates a separate chunk (about.[hash].js) for this route 打包的时候生成一个具名的文件
 		// which is lazy-loaded when the route is visited. 起懒加载的作用
-		component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+		component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+		props: { //2.普通路由传参，对象模式
+			food: 'banana'
+		},
+		meta: { // 路由原信息, 做一些权限处理
+			title: '关于'
+		}
 	},
 	{
 		path: '/argu/:name', //动态路由
 		name: 'argu',
-		component: () => import('@/views/argu.vue')
+		component: () => import('@/views/argu.vue'),
+		props: true //1.动态路由传参
+		
+	},
+	{
+		path: '/login',
+		name: 'login',
+		component: () => import('@/views/login.vue')
 	},
 	{
 		path: '/parent', //嵌套路由
@@ -39,7 +59,7 @@ export default [
 		}
 	},
 	{
-		path: '*', //路由重定向
+		path: '/main', //路由重定向
 		// redirect: '/'
 		// redirect: {
 		// 	name: 'Home'
@@ -52,5 +72,9 @@ export default [
 				name: 'Home'
 			}
 		}
+	},
+	{
+		path: '*',
+		component: () => import('@/views/error_404.vue')
 	}
 ]

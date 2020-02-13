@@ -10,9 +10,12 @@
     </div>
 
 		<!--命名视图-->
-    <router-view/>
-		<router-view name='emali'></router-view>
-		<router-view name='tel'></router-view>
+		<transition-group name="router">
+		<!-- <transition-group :name="routerTransition"> -->
+			<router-view key="default" />
+			<router-view key="email" name='emali'></router-view>
+			<router-view key="tel" name='tel'></router-view>
+		</transition-group>
   </div>
 </template>
 
@@ -21,11 +24,38 @@ export default {
   name: '',
   data () {
     return {
+			routerTransition: ''
     }
-  }
+	},
+	watch: {
+		'$router' (to) {
+			// 为指定的路由切换动效
+			to.query && to.query.transitionName && (this.routerTransition = to.query.transitionName)
+		}
+	}
 }
 </script>
-<style>
+<style lang='less'>
+// 页面进入时的效果
+.router-enter { // 即将进入路由
+	opacity: 0;
+}
+.router-enter-active { // 设置组件从没有到有的过程
+	transition: opacity  1s ease;
+}
+.router-enter-to { // 页面完全显示之后的状态
+	opacity: 1;
+}
+// 页面离开时的效果
+.router-leave { // 即将离开路由
+	opacity: 1;
+}
+.router-leave-active {
+	transition: opacity  1s ease;
+}
+.router-leave-to {
+	opacity: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
