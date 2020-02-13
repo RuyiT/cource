@@ -1,8 +1,11 @@
 <template>
 	<div>
-		<!-- <a-input v-model="inputValue"></a-input> -->
-		<a-input :value="inputValue" @input="handleInput"></a-input>
-		<p>{{inputValue}} -> lastLetter is {{lastLetter}}</p>
+		<!-- 直接用v-model会报错，得写一个stateValue自己的getter和setter方法 -->
+		<!-- <a-input v-model="stateValue"></a-input> -->
+
+		<!-- 用下面这种方式写,在computed里面用MapState引入 -->
+		<a-input :value="stateValue" @input="handleStateValueChange"></a-input>
+		<p>{{stateValue}} -> lastLetter is {{lastLetter}}</p>
 		<a-show :content='inputValue' />
 		<p>appName:{{appName}}</p>
 		<p>appNameWithVersion:{{appNameWithVersion}}</p>
@@ -37,7 +40,7 @@
 			}
 		},
 		methods: {
-			...mapMutations(['SET_APP_NAME', 'SET_APP_VERSION','SET_USER_NAME']),
+			...mapMutations(['SET_APP_NAME', 'SET_APP_VERSION','SET_USER_NAME', 'SET_STATE_VALUE']),
 			...mapActions(['updateAppName']),
 			handleInput (val) {
 				this.inputValue = val
@@ -58,6 +61,7 @@
 				// }),
 				// this.SET_APP_NAME({appName:'newappName'})
 				this.updateAppName()
+				// this.$store.state.appName = 's' // 直接修改会报错
 				// this.$store.commit('SET_APP_VERSION')
 				// this.SET_APP_VERSION()
 
@@ -82,6 +86,9 @@
 						]
 					}
 				})
+			},
+			handleStateValueChange (val) {
+				this.SET_STATE_VALUE(val)
 			}
 		},
 		computed: {
@@ -97,8 +104,17 @@
 				userName: state => state.user.userName,
 				appVersion: state => state.appVersion,
 				// todoList: state => state.todo ? state.todo.todoList : []
-				todoList: state => state.user.todo ? state.user.todo.todoList : []
+				todoList: state => state.user.todo ? state.user.todo.todoList : [],
+				// stateValue: state => state.stateValue
 			}),
+			stateValue: {
+				get () {
+					return this.$store.state.stateValue
+				},
+				set (value) {
+					this.SET_STATE_VALUE(value)
+				}
+			},
 			...mapGetters(['appNameWithVersion','firstLetter']),
 			// ...mapGetters('user',['firstLetter']),
 			// appNameWithVersion () {
@@ -114,7 +130,7 @@
 			// 	return this.$store.state.user.userName
 			// }
 			lastLetter () {
-				return this.inputValue.substr(-1,1)
+				return this.stateValue.substr(-1,1)
 			}
 		}
 	}
