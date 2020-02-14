@@ -6,6 +6,14 @@ git merge dev 当前分支合并dev代码
 git branch -d dev 删除dev分支
 git tag dev 创建标签
 如果要推送某个标签到远程，使用命令git push origin <tagname>：
+/* git 撤销，放弃本地修改，放弃已提交修改 *./
+1.未使用 git add 缓存代码时
+	git checkout . 命令
+2.已经使用了git add 缓存了代码
+	2.1) git reset HEAD . 命令
+	2.2) git reset HEAD '文件名'
+3.已经用 git commit 提交了代码
+  git reset --hard HEAD^
 
 /*已有项目绑定git仓库*/
 1.github创建一个空的仓库

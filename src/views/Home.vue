@@ -4,12 +4,14 @@
     <button @click="handleClick('back')">返回上一页</button>
     <button @click="handleClick('push')">跳转到argu</button>
     <button @click="handleClick('replace')">替换到parent</button>
+		<button @click="getInfo">请求数据</button>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
+import {getUserInfo} from '@/api/user'
 
 export default {
 	name: 'Home',
@@ -35,6 +37,14 @@ export default {
 		else next(false)
 	},
   methods: {
+		getInfo() {
+			getUserInfo({userId: 32}).then(res => {
+				console.log({res})
+			})
+			// axios.post('/getUserInfo', {userId: 32}).then(res => {
+			// 	console.log(res)
+			// })
+		},
     handleClick (type) {
       if (type === 'back') this.$router.back()
       else if (type === 'push') {
