@@ -35,6 +35,11 @@ export default [
 		
 	},
 	{
+		path: '/count-to', // 记数组件
+		name: 'count_to',
+		component: () => import('@/views/count-to.vue')	
+	},
+	{
 		path: '/login',
 		name: 'login',
 		component: () => import('@/views/login.vue')
