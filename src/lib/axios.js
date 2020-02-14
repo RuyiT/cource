@@ -25,7 +25,7 @@ class HttpRequest {
 	interceptors (instance, url) {
 		instance.interceptors.request.use(config => {
 			// 添加全局的loading...
-			// Spin.show() iview的控制显示隐藏
+			// Spin.show() iview的控制loading显示隐藏
 			if (!Object.keys(this.queue).length) {
 				// Spin.show
 			}
