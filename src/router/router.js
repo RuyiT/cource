@@ -40,6 +40,11 @@ export default [
 		component: () => import('@/views/count-to.vue')	
 	},
 	{
+		path: '/split-pane', // div分割组件
+		name: 'split_pane',
+		component: () => import('@/views/split-pane.vue')	
+	},
+	{
 		path: '/login',
 		name: 'login',
 		component: () => import('@/views/login.vue')
