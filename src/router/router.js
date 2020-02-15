@@ -45,6 +45,11 @@ export default [
 		component: () => import('@/views/split-pane.vue')	
 	},
 	{
+		path: '/render-page', // render组件
+		name: 'render_page',
+		component: () => import('@/views/render-page.vue')	
+	},
+	{
 		path: '/login',
 		name: 'login',
 		component: () => import('@/views/login.vue')
