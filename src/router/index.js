@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './router'
-import { setTitle } from '@/lib/util.js'
+import store from '@/store'
+import { setTitle, setToken, getToken } from '@/lib/util.js'
 
 Vue.use(VueRouter)
 
@@ -10,17 +11,32 @@ const router = new VueRouter({
   routes: routes
 })
 
-const HAS_LOGINED = true
+const HAS_LOGINED = false
 
 //路由前置守卫
 router.beforeEach((to, from, next) => { 
-	to.meta && to.meta.title && setTitle(to.meta.title)
-	if(to.name !== 'login') { //判断是否时登陆页面
-		if(HAS_LOGINED) next() //判断是否已经登陆，已经登陆直接跳转
-		else next({ name: 'login'}) //没有登陆的话跳转到登陆页面
+	// to.meta && to.meta.title && setTitle(to.meta.title)
+	// if(to.name !== 'login') { //判断是否时登陆页面
+	// 	if(HAS_LOGINED) next() //判断是否已经登陆，已经登陆直接跳转
+	// 	else next({ name: 'login'}) //没有登陆的话跳转到登陆页面
+	// } else {
+	// 	if (HAS_LOGINED) next({ name: 'Home'}) //跳转的是登陆页面的话，如果已经登陆跳转到Home页
+	// 	else next()
+	// }
+	const token = getToken()
+	console.log({token})
+	if (token) {
+		store.dispatch('authorization', token).then(() => {
+			if (to.name === 'login') {
+				next({name: 'Home'})
+			}else{next()}
+		}).catch(() => {
+			setToken('') // 这里一定要把token清除，因为token失效了，不然会陷入死循环，从下面的login跳转，然后又进入boforEach这个守卫里面形成死循环
+			next({ name: 'login'})
+		})
 	} else {
-		if (HAS_LOGINED) next({ name: 'Home'}) //跳转的是登陆页面的话，如果已经登陆跳转到Home页
-		else next()
+		if (to.name === 'login') next()
+		else next({ name : 'login'})
 	}
 })
 

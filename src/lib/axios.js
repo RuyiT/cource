@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { baseURL } from '@/config'
+import { getToken } from '@/lib/util'
 class HttpRequest {
 	constructor (baseUrl = baseURL) {
 		// (baseUrl = baseURL) 相当于 baseUrl = baseUrl || baseURL
@@ -30,13 +31,13 @@ class HttpRequest {
 				// Spin.show
 			}
 			this.queue[url] = true
+			config.headers['Authorization'] = getToken() // 设置token
 			return config
 		},error => {
 			return Promise.reject(error)
 		})
 		instance.interceptors.response.use (res => {
 			this.distroy(url)
-			console.log(res)
 			const { data, status } = res
 			return { data, status }
 		}, error => {

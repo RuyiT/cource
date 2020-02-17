@@ -15,6 +15,6 @@ module.exports = {
 	},
 	productionSourceMap: false, //打包时不生程.map文件
 	devServer: {
-		// proxy: 'http://localhost:3000' //需要代理的地址
+		proxy: 'http://localhost:3000' //需要代理的地址
 	}
 }
