@@ -50,6 +50,11 @@ export default [
 		component: () => import('@/views/render-page.vue')	
 	},
 	{
+		path: '/menu-page', // 递归组件
+		name: 'menu-page',
+		component: () => import('@/views/menu-page.vue')	
+	},
+	{
 		path: '/login',
 		name: 'login',
 		component: () => import('@/views/login.vue')

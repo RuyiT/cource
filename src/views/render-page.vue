@@ -1,7 +1,7 @@
 <template>
 <div>
 	<list :list="list" :style="{color: 'red'}" :render="renderFunc">
-		<count-to slot="aa" slot-scope="count" :end-val="count.number">这个count对象通过slot-scope接收:number传过来的对象</count-to> 
+		<!-- <count-to slot="aa" slot-scope="count" :end-val="count.number">这个count对象通过slot-scope接收:number传过来的对象</count-to>  -->
 	</list>
 </div>
 </template>
@@ -46,10 +46,10 @@ export default {
 			)
 		},
 		handleClick (event) {
-			// console.log(event)
+			console.log(event)
 		},
 		handleEnd () { // 绑定自定义的事件
-			// console.log('end!')
+			console.log('end!')
 		}
 	}
 }
