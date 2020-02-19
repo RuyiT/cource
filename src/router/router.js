@@ -1,17 +1,24 @@
 import Home from '@/views/Home.vue'
+import Layout from '@/views/layout.vue'
 export default [
 	{
 		path: '/',
 		name: 'Home',
-		alias: 'home_page', //别名路径，输入这个路径也是home
-		component: Home,
-		props: route => ({ //函数模式路由传参
-			food: route.query.food //这是一个对象，也可以用函数模式返回对象
-		}),
-		beforeEnter: (to, form, next) => { //路由内独享守卫
-			//写些判断逻辑
-			next()
-		}
+		// alias: 'home_page', //别名路径，输入这个路径也是home
+		component: Layout,
+		// props: route => ({ //函数模式路由传参
+		// 	food: route.query.food //这是一个对象，也可以用函数模式返回对象
+		// }),
+		// beforeEnter: (to, form, next) => { //路由内独享守卫
+		// 	//写些判断逻辑
+		// 	next()
+		// }
+		children: [
+			{
+				path: 'Home',
+				component: Home
+			}
+		]
 	},
 	{
 		path: '/about',
@@ -38,6 +45,11 @@ export default [
 		path: '/count-to', // 记数组件
 		name: 'count_to',
 		component: () => import('@/views/count-to.vue')	
+	},
+	{
+		path: '/lab', // 调试组件
+		name: 'lab',
+		component: () => import('@/views/lab/lab.vue')	
 	},
 	{
 		path: '/split-pane', // div分割组件

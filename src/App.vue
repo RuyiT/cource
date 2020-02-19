@@ -1,21 +1,21 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav"> -->
       <!-- <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> -->
 
 			<!--命名路由-->
-			<router-link :to="{name: 'Home'}">Home</router-link> |
+			<!-- <router-link :to="{name: 'Home'}">Home</router-link> |
       <router-link :to="{name: 'About'}">About</router-link>
-    </div>
+    </div> -->
 
 		<!--命名视图-->
-		<transition-group name="router">
+		<!-- <transition-group name="router"> -->
 		<!-- <transition-group :name="routerTransition"> -->
 			<router-view key="default" />
 			<router-view key="email" name='emali'></router-view>
 			<router-view key="tel" name='tel'></router-view>
-		</transition-group>
+		<!-- </transition-group> -->
   </div>
 </template>
 
@@ -36,6 +36,12 @@ export default {
 }
 </script>
 <style lang='less'>
+html,body{
+	height: 100%;
+}
+body{
+	margin: 0
+}
 // 页面进入时的效果
 .router-enter { // 即将进入路由
 	opacity: 0;
@@ -61,7 +67,8 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   // text-align: center;
-  color: #2c3e50;
+	color: #2c3e50;
+	height: 100%;
 }
 
 #nav {
@@ -76,4 +83,5 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
 </style>
