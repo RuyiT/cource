@@ -1,18 +1,19 @@
 <template>
 	<div>
-		<!--
-		<resize-box>
+		
+		<resize-box style="margin-top: 100px;margin-left:200px">
 			<div class="resize">
 				test resize
 			</div>
 		</resize-box>
+		<!--
 		<vue-drag-resize  :w="vw" :h="vh" :x="left" :y="top" :resizing="resize" :dragging="resize" :isResizable="true" :sticks="['tm','bm','ml','mr']">
 			<div class="resize" style="width: 100%; height: 100%;">
 				test resize
 			</div>
 		</vue-drag-resize>
 		-->
-		<!--.app-shrink是要缩放的元素，.app-shrink-drag是触发鼠标按下移动的源-->
+		<!--.app-shrink是要缩放的元素，.app-shrink-drag是触发鼠标按下移动的源
 		<div :style="shirnkStyle" class="app-shrink">
 			<div class="app-shrink-drag" style="background:red" ref='resizeX' v-drag='{set}' @mousedown="dragonmousedown">
 			</div>
@@ -23,6 +24,7 @@
 			<div class="drag-top-y" style="background:red" ref='resizeYT' v-drag='{set}' @mousedown="dragonmousedown">
 			</div>	
 		</div>
+		-->
 	</div>
 </template>
 
@@ -76,7 +78,7 @@
 				} else if(this.resizeDom === this.$refs.resizeY) {
 					this.dragValY = e.y
 				} else if(this.resizeDom === this.$refs.resizeYT) {
-					this.dragMt =  e.y
+					// this.dragMt =  e.y
 					this.dragValY = e.y
 				}
 			},
@@ -141,7 +143,9 @@
 		// height: 200px;
 		// text-align: center;
 		// line-height: 200px;
-		border:1px solid red;
+		// border:1px solid red;
+		margin-top: 200px;
+		margin-left: 200px;
 	}
 .app-shrink{
 	position: relative;
