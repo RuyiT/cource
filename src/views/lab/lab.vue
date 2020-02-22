@@ -1,20 +1,30 @@
 <template>
 	<div>
 		
-		<resize-box style="margin-top: 100px;margin-left:200px">
+		<!-- <resize-box style="margin-top: 100px;margin-left:200px">
 			<div class="resize">
 				test resize
 			</div>
-		</resize-box>
-		<!--
-		<vue-drag-resize  :w="vw" :h="vh" :x="left" :y="top" :resizing="resize" :dragging="resize" :isResizable="true" :sticks="['tm','bm','ml','mr']">
-			<div class="resize" style="width: 100%; height: 100%;">
-				test resize
-			</div>
-		</vue-drag-resize>
-		-->
-		<!--.app-shrink是要缩放的元素，.app-shrink-drag是触发鼠标按下移动的源
-		<div :style="shirnkStyle" class="app-shrink">
+		</resize-box> -->
+		<!-- <div style="position: relative;top: 100px;left: 100px"> -->
+			
+		
+		<div class="out" :style="`margin-top:${ctop}px;margin-left:${cleft}px`">
+			<vue-drag-resize style="background: pink;position: absolute" :w="200" :h='200' v-on:dragging="resizedrag" :isResizable="false" :sticks="['tm','bm','ml','mr']">
+				<!-- <div style="text-align: center;line-height:200px;background: red">
+					drag
+				</div> -->
+				drag
+			</vue-drag-resize>
+				<!-- <div class="resize" style="width: 100%; height: 300px; background: #e0e0e0">
+						test resize
+					</div> -->
+		</div>
+		<!-- </div> -->
+
+		
+		<!--.app-shrink是要缩放的元素，.app-shrink-drag是触发鼠标按下移动的源-->
+		<!-- <div :style="shirnkStyle" class="app-shrink" draggable="true" @drop="drop" @dragover.prevent="dragover">
 			<div class="app-shrink-drag" style="background:red" ref='resizeX' v-drag='{set}' @mousedown="dragonmousedown">
 			</div>
 			<div class="drag-down-y" style="background:red" ref='resizeY' v-drag='{set}' @mousedown="dragonmousedown">
@@ -23,20 +33,25 @@
 			</div>
 			<div class="drag-top-y" style="background:red" ref='resizeYT' v-drag='{set}' @mousedown="dragonmousedown">
 			</div>	
-		</div>
-		-->
+		</div> -->
+		
 	</div>
 </template>
 
 <script>
+import VueDragResize from 'vue-drag-resize'
+
 	export default {
 		name: '',
+		components:{
+			VueDragResize
+		},
 		data() {
 			return {
 				vw: 100,
 				vh: 100,
-				top: 100,
-				left: 100,
+				top: 0,
+				left: 0,
 				widthVal:"400", //存放要缩放元素.app-shrink的实时变动宽度值
 				heightVal: '400',
 				oldWidthVal:"400", //存放.app-shrink-drag是触发鼠标按下时，要缩放元素.app-shrink的su宽度值。
@@ -65,14 +80,23 @@
 			this.vh = 200
 		},
 		methods: {
-			resize(newRect) {
-				this.vw = newRect.width;
-				this.vh = newRect.height;
+			drop(event) {
+				// console.log('aaaaaaaaaa',event)
+			},
+			dragover(e) {
+				// console.log('clicent',e)
+				this.MT = e.clientY  -e.offsetY
+				// this.ML = e.clientX - e.offsetY
+			},
+			resizedrag(newRect) {
+				// this.vw = newRect.width;
+				// this.vh = newRect.height;
 				this.top = newRect.top;
+				console.log(newRect)
 				this.left = newRect.left
 			},
 			set(e) {
-				console.log('eeeeeeee',e)
+				// console.log('eeeeeeee',e)
 				if(this.resizeDom === this.$refs.resizeX){
 					this.dragValX = e.x
 				} else if(this.resizeDom === this.$refs.resizeY) {
@@ -95,11 +119,17 @@
 					'margin-left': this.ML + "px"
 				};
 			},
+			ctop() {
+				return this.top
+			},
+			cleft () {
+				return this.left
+			}
 		},
 		watch: {
 			dragValX(val){          
 				this.widthVal=parseInt(this.oldWidthVal)+parseInt(val)    
-				console.log('drag',this.dragVal)      
+				// console.log('drag',this.dragVal)      
 			},
 			dragValY(val){
 				this.heightVal=parseInt(this.oldHeightVal)+parseInt(val) 
@@ -111,7 +141,7 @@
 		directives:{  //注册自定义局部指令
 			drag(el,bindling){        
 				let oDiv = el; //当前元素  
-				console.log('aaaaaa',bindling)        
+				// console.log('aaaaaa',bindling)        
 				oDiv.onmousedown = function(e) {              
 					e.preventDefault(); 
 					let disX = e.clientX,
@@ -144,8 +174,14 @@
 		// text-align: center;
 		// line-height: 200px;
 		// border:1px solid red;
-		margin-top: 200px;
-		margin-left: 200px;
+		// margin-top: 200px;
+		// margin-left: 200px;
+	}
+	.out{
+		width: 200px;
+		height: 300px;
+		background: #e0e0e0;
+		// position: absolute; 
 	}
 .app-shrink{
 	position: relative;

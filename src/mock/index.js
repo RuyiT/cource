@@ -1,10 +1,16 @@
 import Mock from 'mockjs'
 //npm install mockjs -D
-import { getUserInfo } from './response/user'
+import { getUserInfo, login, authorization } from './response/user'
+import { getTableData } from './response/data'
 const Random = Mock.Random
 
 Mock.mock(/\/getUserInfo/, 'post', getUserInfo) // 正则的方式传参，效果同下
 // Mock.mock('http://localhost:3000/getUserInfo','post', getUserInfo) // mock拦截
+
+Mock.mock(/\/getUserInfo/, 'post', getUserInfo)
+Mock.mock(/\/login/, 'post', login)
+Mock.mock(/\/authorization/, 'get', authorization)
+Mock.mock(/\/getTableData/, 'get', getTableData)
 
 // 设置mock的响应时间
 Mock.setup({

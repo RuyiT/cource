@@ -68,3 +68,22 @@ export const getUserInfo = (options) => {
 	// return Mock.mock(arr) // 得到length为5的数组，age属性值每次加2
 	return Mock.mock(template)
 }
+export const login = () => {
+  return {
+    code: 200,
+    data: {
+      token: 'xxx'
+    },
+    mes: ''
+  }
+}
+
+export const authorization = () => {
+  return {
+    code: 200,
+    data: {
+      token: 'xxx'
+    },
+    mes: ''
+  }
+}

@@ -7,17 +7,16 @@ import iview from 'iview'
 import 'iview/dist/styles/iview.css'
 import CountTo from '_c/count-to'
 import ResizeBox from 'vue-resize-box'
-import VueDragResize from 'vue-drag-resize'
 
 // import Mock from './mock'
 
-// if (process.env.NODE_ENV !== 'production') require('./mock')
+if (process.env.NODE_ENV !== 'production') require('./mock')
 
 Vue.config.productionTip = false
 Vue.prototype.$bus = Bus
 Vue.use(iview)
 Vue.use(ResizeBox)
-Vue.component('vue-drag-resize', VueDragResize)
+// Vue.component('vue-drag-resize', VueDragResize)
 
 const handleClick = event => {
   console.log(event)

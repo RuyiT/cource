@@ -47,6 +47,17 @@ export default [
 		component: () => import('@/views/count-to.vue')	
 	},
 	{
+    path: '/', // 可编辑表格
+    name: 'table', 
+    component: Layout,
+    children: [
+      {
+        path: 'table',
+        component: () => import('@/views/table.vue')
+      }
+    ]
+  },
+	{
 		path: '/lab', // 调试组件
 		name: 'lab',
 		component: () => import('@/views/lab/lab.vue')	
