@@ -1,36 +1,64 @@
 <template>
 	<div class="folder-wrapper">
-		<Tree :data="folderTree" :render="renderFunc"></Tree>
+		<!-- <Tree :data="folderTree" :render="renderFunc"></Tree> -->
+		<folder-tree :folder-list="folderList" 
+			:file-list="fileList"
+			:folder-drop="folderDrop"
+			:file-drop="fileDrop"
+			:beforeDelete="beforeDelete" />
 	</div>
 </template>
 
 <script>
 import { getFolderList, getFileList} from '@/api/data'
-import { putFileInFolder, transferFolderToTree } from '@/lib/util'
+import FolderTree from '_c/folder-tree'
 export default {
 	name: '',
 	data() {
 		return {
 			folderList: [],
 			fileList: [],
-			folderTree: [],
-			renderFunc: (h, { root, node, data }) => {
-				return (
-					<div class="tree-item">
-						{ data.type === 'folder' ? <icon type="ios-folder" color="#2d8cf0" style="margin-right: 5px" /> : ''}
-						{data.title}
-					</div>
-				)
-			}
+			folderDrop: [
+				{
+					name: 'rename',
+					title: '重命名'
+				},
+				{
+					name: 'delete',
+					title: '删除文件夹'
+				}
+			],
+			fileDrop: [
+				{
+					name: 'rename',
+					title: '重命名'
+				},
+				{
+					name: 'delete',
+					title: '删除文件'
+				}
+			],
 		}
 	},
-	methods: {
-
+	components: {
+		FolderTree
 	},
+	methods: {
+    beforeDelete () {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          let error = new Error('error')
+          if (!error) {
+            resolve()
+          } else reject(error)
+        }, 2000)
+      })
+    }
+  },
 	mounted () {
 		Promise.all([getFolderList(),getFileList()]).then(res => {
-			console.log(transferFolderToTree(putFileInFolder(res[0].data, res[1].data)))
-			this.folderTree	= transferFolderToTree(putFileInFolder(res[0].data, res[1].data))
+			this.folderList = res[0].data
+			this.fileList = res[1].data
 		})
 	}
 } 
@@ -39,11 +67,6 @@ export default {
 <style lang="less" >
 	.folder-wrapper{
 		width: 500px;
-		.tree-item {
-			display: inline-block;
-			width: ~"calc(100% - 50px)";
-			height: 28px;
-			line-height: 28px;
-		}
+		
 	}
 </style>
