@@ -56,6 +56,17 @@ export default [
         component: () => import('@/views/table.vue')
       }
     ]
+	},
+	{
+    path: '/', // tree组件
+    name: 'Home', 
+    component: Layout,
+    children: [
+      {
+        path: 'folder_tree',
+        component: () => import('@/views/folder-tree/folder-tree.vue')
+      }
+    ]
   },
 	{
 		path: '/lab', // 调试组件

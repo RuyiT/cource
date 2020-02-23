@@ -1,7 +1,7 @@
 import Mock from 'mockjs'
 //npm install mockjs -D
 import { getUserInfo, login, authorization } from './response/user'
-import { getTableData } from './response/data'
+import { getTableData, getFileList, getFolderList } from './response/data'
 const Random = Mock.Random
 
 Mock.mock(/\/getUserInfo/, 'post', getUserInfo) // 正则的方式传参，效果同下
@@ -11,6 +11,8 @@ Mock.mock(/\/getUserInfo/, 'post', getUserInfo)
 Mock.mock(/\/login/, 'post', login)
 Mock.mock(/\/authorization/, 'get', authorization)
 Mock.mock(/\/getTableData/, 'get', getTableData)
+Mock.mock(/\/getFileList/, 'get', getFileList)
+Mock.mock(/\/getFolderList/, 'get', getFolderList)
 
 // 设置mock的响应时间
 Mock.setup({

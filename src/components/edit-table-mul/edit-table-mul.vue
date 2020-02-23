@@ -61,13 +61,13 @@ export default {
 						// console.log( row, index, column)
 						const keyArr = this.insideData[index] ? this.insideData[index].edittingKeyArr : []
 						console.log(keyArr)
-						const isEditting = keyArr && keyArr.indexOf(column.key) > -1
+						const isEditting = keyArr && keyArr.includes(column.key)
 						return (
 							<div>
-								{keyArr && keyArr.indexOf(column.key) > -1
+								{isEditting
 								? <i-input value={row[column.key]} style='width: 50px' on-input={this.handleInput.bind(this, row, index, column)}></i-input> 
 								: <span>{row[column.key]}</span>}
-								<i-button on-click={() => { this.handleClick({ row, index, column}) }}>{keyArr && keyArr.indexOf(column.key) > -1 ? '保存' : '编辑'}</i-button>
+								<i-button on-click={() => { this.handleClick({ row, index, column}) }}>{isEditting ? '保存' : '编辑'}</i-button>
 							</div>
 						)
 					}
