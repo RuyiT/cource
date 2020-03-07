@@ -7,6 +7,9 @@ import iview from 'iview'
 import 'iview/dist/styles/iview.css'
 import CountTo from '_c/count-to'
 import ResizeBox from 'vue-resize-box'
+import MessageBox from '@/components/message-box/index.js'
+import tips from '@/components/tips/index.js'
+
 
 // import Mock from './mock'
 
@@ -16,6 +19,10 @@ Vue.config.productionTip = false
 Vue.prototype.$bus = Bus
 Vue.use(iview)
 Vue.use(ResizeBox)
+
+// 自有插件
+Vue.use(MessageBox)
+Vue.use(tips)
 // Vue.component('vue-drag-resize', VueDragResize)
 
 const handleClick = event => {

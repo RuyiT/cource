@@ -87,6 +87,21 @@
 		methods: {
 			handleCollapsed() {
 				this.collapsed  = !this.collapsed
+				// console.log('22')
+				this.$message({
+					title: 'sdfsad',
+					content: '内容',
+					type: 'warning',
+					confirmButtonText:'提交',
+					showCancelButton: true,
+					cancelButtonText: '不提交'
+				}).then(action => {
+					console.log(action)
+				})
+				// this.$tips({
+				// 	text: '大概',
+				// 	success: true,
+				// })
 			}
 		}
 	}
